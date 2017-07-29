@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedTest", "LedTest\LedTest.csproj", "{D7AEBF42-66A4-4C61-BDC4-29E889CB887E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackControls", "FeedbackControls\FeedbackControls.csproj", "{7D50471B-721D-491C-9E35-F905E1C3861A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7AEBF42-66A4-4C61-BDC4-29E889CB887E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7AEBF42-66A4-4C61-BDC4-29E889CB887E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7AEBF42-66A4-4C61-BDC4-29E889CB887E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7AEBF42-66A4-4C61-BDC4-29E889CB887E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D50471B-721D-491C-9E35-F905E1C3861A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D50471B-721D-491C-9E35-F905E1C3861A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D50471B-721D-491C-9E35-F905E1C3861A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D50471B-721D-491C-9E35-F905E1C3861A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
