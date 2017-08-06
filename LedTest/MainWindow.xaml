@@ -23,11 +23,11 @@
         <uc:Led Name="led1" Height="60" Width="60" IsActive="False"/>
         <!--<uc:Led Name="led1" Height="60" Width="60" IsActive="False" Flashing="False" FlashingPeriod="500"  />-->
         <TextBlock Grid.Column="1">Led without binding</TextBlock>
-        <Button Name="btnChange"  Grid.Column="2"  Content="Change" Click="btnChange_Click" />
+        <Button Name="btnChange" Grid.Column="2" Content="Change" Click="btnChange_Click" />
 
         <uc:Led Name="led2" Grid.Row="2" Height="60" Width="60" IsActive="{Binding LedStatus}"/>
-        <TextBlock  Grid.Row="2" Grid.Column="1">Led with binding</TextBlock>
-        <Button Name="btnChange2"  Grid.Row="2" Grid.Column="2"  Content="Change" Click="btnChange2_Click" />
+        <TextBlock Grid.Row="2" Grid.Column="1">Led with binding</TextBlock>
+        <Button Name="btnChange2" Grid.Row="2" Grid.Column="2" Content="Change" Click="btnChange2_Click" />
 
     </Grid>
 </Window>

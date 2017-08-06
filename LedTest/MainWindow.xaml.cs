@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace LedTest
 {
@@ -22,7 +23,11 @@ namespace LedTest
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         bool ledStatus;
-        public bool LedStatus { get { return ledStatus; } set { ledStatus = value; this.OnPropertyChanged("LedStatus"); } }
+        public bool LedStatus
+        {
+            get { return ledStatus; }
+            set { ledStatus = value; FirePropertyChanged(); }
+        }
 
 
         public MainWindow()
@@ -42,11 +47,11 @@ namespace LedTest
         {
             LedStatus = !LedStatus;
         }
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        protected void FirePropertyChanged([CallerMemberName]string propertyName = "")
         {
-            this.PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
