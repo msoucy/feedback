@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FeedbackControls"
         mc:Ignorable="d"
-        Title="FeedbackWindow" Height="300" Width="300">
+        Title="FeedbackWindow" Height="300" Width="631.755">
     <Window.Resources>
         <DataTemplate x:Key="DigitalOutputTemplate">
             <StackPanel Orientation="Horizontal">
@@ -20,15 +20,46 @@
                 <ToggleButton IsChecked="{Binding IsEnabled}" Height="40" Width="40" VerticalAlignment="Center"/>
             </StackPanel>
         </DataTemplate>
+
+        <DataTemplate x:Key="AnalogInputTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <Slider x:Name="analogSlider" Value="{Binding Value}"
+                        Minimum="-1" Maximum="1"
+                        TickPlacement="BottomRight" TickFrequency="0.25" IsSnapToTickEnabled="True"
+                        Width="120" Height="40"
+                        />
+                <TextBlock Text="{Binding ElementName=pwmSlider,Path=Value,StringFormat={}{0:###}}"
+                           Width="20" VerticalAlignment="Center" HorizontalAlignment="Right" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PWMOutputTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                <Slider x:Name="pwmSlider" Value="{Binding Value}"
+                        Minimum="0" Maximum="255"
+                        TickPlacement="BottomRight" TickFrequency="16" IsSnapToTickEnabled="True"
+                        Width="120" Height="40"
+                        />
+                <TextBlock Text="{Binding ElementName=pwmSlider,Path=Value,StringFormat={}{0:###}}" Width="20" />
+            </StackPanel>
+        </DataTemplate>
     </Window.Resources>
     <DockPanel LastChildFill="False">
         <Button DockPanel.Dock="Bottom" Click="Stop_Click">Stop</Button>
+
+        <ItemsControl ItemsSource="{Binding Input}" DockPanel.Dock="Left"
+                      ItemTemplate="{StaticResource DigitalInputTemplate}"/>
         
-        <ItemsControl ItemsSource="{Binding Output}" DockPanel.Dock="Left"
+        <ItemsControl ItemsSource="{Binding AnalogInput}" DockPanel.Dock="Left"
+                      ItemTemplate="{StaticResource AnalogInputTemplate}"/>
+
+        <ItemsControl ItemsSource="{Binding Output}" DockPanel.Dock="Right"
                       ItemTemplate="{StaticResource DigitalOutputTemplate}"/>
 
-        <ItemsControl ItemsSource="{Binding Input}" DockPanel.Dock="Right"
-                      ItemTemplate="{StaticResource DigitalInputTemplate}"/>
+        <ItemsControl ItemsSource="{Binding PWM}" DockPanel.Dock="Right"
+                      ItemTemplate="{StaticResource PWMOutputTemplate}"/>
 
     </DockPanel>
 </Window>

@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ValueViewModel.cs" />
     <Compile Include="Utility.cs" />
     <Page Include="FeedbackWindow.xaml">
       <SubType>Designer</SubType>

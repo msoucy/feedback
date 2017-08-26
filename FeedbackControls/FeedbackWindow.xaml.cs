@@ -15,6 +15,8 @@ using System.Timers;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Windows.Threading;
+using ByteViewModel = FeedbackControls.ValueViewModel<byte>;
+using LongViewModel = FeedbackControls.ValueViewModel<long>;
 
 namespace FeedbackControls
 {
@@ -45,15 +47,29 @@ namespace FeedbackControls
             return _activeWindow.model.Input[channel].IsEnabled;
         }
 
+        public static long GetAnalogInput(int channel)
+        {
+            return _activeWindow.model.AnalogInput[channel].Value;
+        }
+
+        public static void SetPWM(int channel, int value)
+        {
+            _activeWindow.model.PWM[channel].Value = (byte)value;
+        }
+
         private readonly FeedbackWindowViewModel model = new FeedbackWindowViewModel();
 
-        public FeedbackWindow(int numberOfOutputs, int numberOfInputs)
+        public FeedbackWindow(int numberOfOutputs, int numberOfInputs, int numberOfPWMs = 0, int numberOfAnalogInputs=0)
             : this()
         {
             var outputs = Enumerable.Range(0, numberOfOutputs).Select((_, index) => new DigitalViewModel { Name = $"Output {index + 1}" });
             var inputs = Enumerable.Range(0, numberOfInputs).Select((_, index) => new DigitalViewModel { Name = $"Input {index + 1}" });
+            var pwms = Enumerable.Range(0, numberOfPWMs).Select((_, index) => new ByteViewModel { Name = $"PWM {index + 1}" });
+            var analogIn = Enumerable.Range(0, numberOfPWMs).Select((_, index) => new LongViewModel { Name = $"Analog In {index + 1}" });
             model.Output = new ObservableCollection<DigitalViewModel>(outputs);
             model.Input = new ObservableCollection<DigitalViewModel>(inputs);
+            model.PWM = new ObservableCollection<ByteViewModel>(pwms);
+            model.AnalogInput = new ObservableCollection<LongViewModel>(analogIn);
         }
 
         public FeedbackWindow()
@@ -64,7 +80,7 @@ namespace FeedbackControls
 
         private static FeedbackWindow _activeWindow = new FeedbackWindow(0, 0);
 
-        public static void Display(int numberOfOutputs, int numberOfInputs)
+        public static void Display(int numberOfOutputs, int numberOfInputs, int numberOfPWMs = 0)
         {            
             // Create a thread
             Thread newWindowThread = new Thread(new ThreadStart(() =>
@@ -72,7 +88,7 @@ namespace FeedbackControls
                 // Create our context, and install it:
                 SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(Dispatcher.CurrentDispatcher));
 
-                _activeWindow = new FeedbackWindow(numberOfInputs, numberOfOutputs);
+                _activeWindow = new FeedbackWindow(numberOfInputs, numberOfOutputs, numberOfPWMs);
                 // When the window closes, shut down the dispatcher
                 _activeWindow.Closed += (s, e) =>
                 {
